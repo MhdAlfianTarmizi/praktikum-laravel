@@ -52,10 +52,8 @@
             <form action="{{ route('admin.home') }}" method="GET">
                 @csrf
                 <div class="input-group">
-                    <input type="search" name="search" class="form-control rounded" placeholder="Cari nama admin"
-                        aria-label="Search" aria-describedby="search-addon" />
-                    <button type="submit" class="btn btn-outline-primary">
-                        search</button>
+                    <input type="search" name="search" class="form-control rounded" placeholder="Cari nama admin" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" class="btn btn-outline-primary">search</button>
                 </div>
             </form>
         </div>
@@ -66,8 +64,7 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col-2">
-            <a class="btn btn-success" href="{{ route('admin.tambah') }}"
-                style="text-decoration: none; margin-left: 30px">
+            <a class="btn btn-success" href="{{ route('admin.tambah') }}" style="text-decoration: none; margin-left: 30px">
                 Tambah Data +
             </a>
         </div>
@@ -93,8 +90,8 @@
                 <td>{{ $userAdmin->jenis_kelamin }}</td>
                 <td>{{ $userAdmin->level }}</td>
                 <td>
-                    <a class="btn btn-outline-warning" href="/admin/editAdmin/{{ $userAdmin->id }}">Edit</a>
-                    <a class="btn btn-outline-danger" href="/admin/deleteAdmin/{{ $userAdmin->id }}">Delete</a>
+                    <a class="btn btn-outline-warning" href="/editAdmin/{{ $userAdmin->id }}">Edit</a>
+                    <a class="btn btn-outline-danger" href="/deleteAdmin/{{ $userAdmin->id }}">Delete</a>
                 </td>
             </tr>
             @endforeach
@@ -102,8 +99,7 @@
     </table><br>
     {{ $data->links() }}
     </div><br><br><br>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
 </body>
 

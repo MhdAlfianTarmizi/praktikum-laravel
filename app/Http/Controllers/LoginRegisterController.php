@@ -11,38 +11,51 @@ use function Laravel\Prompts\password;
 
 class LoginRegisterController extends Controller
 {
-    public function login() {
+    public function login()
+    {
         return view('auth.login');
     }
-    public function register() {
+    public function register()
+    {
         return view('auth.register');
     }
-    public function berita() {
+    public function berita()
+    {
         return view('auth.berita');
     }
-    public function biodata() {
+    public function biodata()
+    {
         return view('biodata');
     }
-    public function aktivitas() {
+    public function aktivitas()
+    {
         return view('aktivitas');
     }
-    public function home() {
+    public function home()
+    {
         return view('home');
     }
-    public function profile() {
+    public function profile()
+    {
         return view('auth.profile');
     }
-    public function userHome() {
+    public function userHome()
+    {
         return view('user.home');
     }
-    public function adminHome()
-{
-    $data = User::where('level', 'admin')->paginate(10); // Misalkan, 10 item per halaman
+    public function adminHome(Request $request)
+    {
+        $search = $request->input('search');
 
-    return view('admin.home', compact('data'));
-}
+        $data = User::where(function ($query) use ($search) {
+            $query->where('name', 'LIKE', '%' . $search . '%');
+        })->paginate(5); // Misalkan, 10 item per halaman
 
-    public function postRegister(Request $request) {
+        return view('admin.home', compact('data'));
+    }
+
+    public function postRegister(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'email' => 'required|email:dns',
@@ -59,20 +72,21 @@ class LoginRegisterController extends Controller
 
         $user->save();
 
-        if($user){
+        if ($user) {
             return redirect('/auth/login')->with('success', 'Akun berhasil dibuat, silahkan melakukan proses login!');
-        }else{
+        } else {
             return back()->with('failed', 'Maaf, terjadi kesalahan, coba kembali beberapa saat!');
         }
     }
 
-    public function postLogin(Request $request) {
+    public function postLogin(Request $request)
+    {
         $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required|min:8|max:20'
         ]);
 
-        if(Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
             if ($user->level == 'user') {
                 return redirect('/user/home');
@@ -83,7 +97,8 @@ class LoginRegisterController extends Controller
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         return redirect('/');
     }
